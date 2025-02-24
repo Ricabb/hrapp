@@ -1,0 +1,37 @@
+import React, { useState } from 'react';
+import Login from './components/Login';
+import FullScreenCalendar from './components/FullScreenCalendar';
+import ProjectForm from './components/ProjectForm';
+import SlidingModal from './components/SlidingModal';
+
+function App() {
+  const [user, setUser] = useState(null);
+  const [showProjectFormModal, setShowProjectFormModal] = useState(false);
+  const [showFullScreenCalendar, setShowFullScreenCalendar] = useState(false);
+
+  return (
+    <div style={{ padding: '20px' }}>
+      <h1>HR Vacation Manager</h1>
+      <Login onLogin={setUser} user={user} />
+
+      {showProjectFormModal && (
+        <SlidingModal onClose={() => setShowProjectFormModal(false)}>
+          <ProjectForm />
+        </SlidingModal>
+      )}
+
+      {showFullScreenCalendar && (
+        <FullScreenCalendar onClose={() => setShowFullScreenCalendar(false)} />
+      )}
+
+      <button onClick={() => setShowProjectFormModal(true)}>
+        Add New Project
+      </button>
+      <button onClick={() => setShowFullScreenCalendar(true)}>
+        View Calendar
+      </button>
+    </div>
+  );
+}
+
+export default App;
